@@ -40,7 +40,7 @@ jobs:
             DATABRICKS_BUNDLE_ENV: prod
             
       - name: Run unit tests
-        run: nutter run "${{ env.PROD_DIRECTORY }} /tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
+        run: nutter run "${{ env.PROD_DIRECTORY }}/tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
         env:
             CLUSTER: ${{ env.CLUSTER_ID }}
             DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST }}
