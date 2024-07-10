@@ -45,6 +45,9 @@ jobs:
         run: nutter run "${{ env.PROD_DIRECTORY }} /tests/" --cluster_id ${{ env.CLUSTER_ID }} --recursive --junit_report --timeout 900
         env:
             DATABRICKS_BUNDLE_ENV: prod
+            DATABRICKS_HOST: ${{ env.DATABRICKS_HOST }}
+            DATABRICKS_CLIENT_ID: ${{ env.DATABRICKS_CLIENT_ID }}
+            DATABRICKS_CLIENT_SECRET: ${{ env.DATABRICKS_CLIENT_SECRET }}
 
   deploy:
     name: Deploy bundle
@@ -66,6 +69,8 @@ jobs:
         run: databricks bundle deploy --target prod
         env:
             DATABRICKS_BUNDLE_ENV: prod
+            DATABRICKS_CLIENT_ID: ${{ env.DATABRICKS_CLIENT_ID }}
+            DATABRICKS_CLIENT_SECRET: ${{ env.DATABRICKS_CLIENT_SECRET }}
 
   pipeline_update:
     name: Run pipeline update
@@ -88,3 +93,5 @@ jobs:
           run: databricks pipelines update --target prod
           env:
               DATABRICKS_BUNDLE_ENV: prod
+              DATABRICKS_CLIENT_ID: ${{ env.DATABRICKS_CLIENT_ID }}
+              DATABRICKS_CLIENT_SECRET: ${{ env.DATABRICKS_CLIENT_SECRET }}
