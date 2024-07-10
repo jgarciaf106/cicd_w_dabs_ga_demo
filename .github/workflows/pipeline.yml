@@ -2,16 +2,15 @@ name: Databricks pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 env:
-    DATABRICKS_CLIENT_ID: ${{secrets.DATABRICKS_CLIENT_ID}}
-    DATABRICKS_CLIENT_SECRET: ${{secrets.DATABRICKS_CLIENT_SECRET}}
-    PROD_DIRECTORY: "/Repos/GA/cicd_w_dabs_ga_demo"
+  DATABRICKS_CLIENT_ID: ${{secrets.DATABRICKS_CLIENT_ID}}
+  DATABRICKS_CLIENT_SECRET: ${{secrets.DATABRICKS_CLIENT_SECRET}}
+  PROD_DIRECTORY: "/Repos/GA/cicd_w_dabs_ga_demo"
 
 jobs:
   unit_testing:
-
     name: Databricks Unit testing
     runs-on: ubuntu-latest
 
@@ -24,27 +23,27 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-    
+
       - name: Setup databricks CLI
         uses: databricks/setup-cli@main
 
       - name: Updating databricks repo
         run: databricks repos update ${{ env.PROD_DIRECTORY }} --branch ${{ github.ref_name }}
         env:
-            DATABRICKS_BUNDLE_ENV: prod
-            
+          DATABRICKS_BUNDLE_ENV: prod
+
       - name: Run unit tests
         run: nutter run "${{ env.PROD_DIRECTORY }}/tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
         env:
-            CLUSTER: ${{ secrets.CLUSTER_ID }}
-            DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST }}
-            DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN }}
+          CLUSTER: ${{ secrets.CLUSTER_ID }}
+          DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN }}
 
   deploy:
     name: Deploy bundle
@@ -58,14 +57,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Setup databricks CLI
         uses: databricks/setup-cli@main
 
       - name: Deploy bundle
         run: databricks bundle deploy --target prod
         env:
-            DATABRICKS_BUNDLE_ENV: prod
+          DATABRICKS_BUNDLE_ENV: prod
 
   run_pipeline:
     name: Run pipeline update
@@ -78,13 +77,13 @@ jobs:
     environment: databricks
 
     steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-      
-        - name: Setup databricks CLI
-          uses: databricks/setup-cli@main
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-        - name: Run pipeline update
-          run: databricks bundle run cicd_w_dabs_ga_demo_job --target prod
-          env:
-              DATABRICKS_BUNDLE_ENV: prod
+      - name: Setup databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Run pipeline update
+        run: databricks bundle run cicd_w_dabs_ga_demo_job --target prod
+        env:
+          DATABRICKS_BUNDLE_ENV: prod
