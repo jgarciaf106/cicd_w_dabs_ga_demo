@@ -5,10 +5,8 @@ on:
     branches: [ "main" ]
 
 env:
-    DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST}}
     DATABRICKS_CLIENT_ID: ${{secrets.DATABRICKS_CLIENT_ID}}
     DATABRICKS_CLIENT_SECRET: ${{secrets.DATABRICKS_CLIENT_SECRET}}
-    CLUSTER_ID: ${{secrets.CLUSTER_ID}}
     PROD_DIRECTORY: "/Repos/GA/cicd_w_dabs_ga_demo"
 
 jobs:
@@ -42,10 +40,11 @@ jobs:
             DATABRICKS_BUNDLE_ENV: prod
             
       - name: Run unit tests
-        run: nutter run "${{ env.PROD_DIRECTORY }} /tests/" --cluster_id ${{ env.CLUSTER_ID }} --recursive --junit_report --timeout 900
+        run: nutter run "${{ env.PROD_DIRECTORY }} /tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
         env:
-            DATABRICKS_HOST: ${{ env.DATABRICKS_HOST }}
-            DATABRICKS_TOKEN: ${{ env.DATABRICKS_TOKEN }}
+            CLUSTER: ${{ env.CLUSTER_ID }}
+            DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST }}
+            DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN }}
 
   deploy:
     name: Deploy bundle
