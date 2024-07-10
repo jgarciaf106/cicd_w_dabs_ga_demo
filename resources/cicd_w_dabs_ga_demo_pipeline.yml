@@ -1,0 +1,12 @@
+# The main pipeline for cicd_w_dabs_ga_demo
+resources:
+  pipelines:
+    cicd_w_dabs_ga_demo_pipeline:
+      name: cicd_w_dabs_ga_demo_pipeline
+      target: cicd_w_dabs_ga_demo_${bundle.environment}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: /Workspace/${workspace.file_path}/src
