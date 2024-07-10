@@ -9,7 +9,7 @@ env:
     DATABRICKS_CLIENT_ID: ${{secrets.DATABRICKS_CLIENT_ID}}
     DATABRICKS_CLIENT_SECRET: ${{secrets.DATABRICKS_CLIENT_SECRET}}
     CLUSTER_ID: ${{secrets.CLUSTER_ID}}
-    PROD_DIRECTORY: "GA"
+    PROD_DIRECTORY: "/Repos/GA/cicd_w_dabs_ga_demo"
 
 jobs:
   unit_testing:
