@@ -36,8 +36,8 @@ jobs:
       - name: Setup databricks CLI
         uses: databricks/setup-cli@main
 
-      - name: Updatind databricks repo
-        run: databricks repos update --path ${{ env.PROD_DIRECTORY }} --branch ${{ github.ref_name }}
+      - name: Updating databricks repo
+        run: databricks repos update ${{ env.PROD_DIRECTORY }} --branch ${{ github.ref_name }}
         env:
             DATABRICKS_BUNDLE_ENV: prod
             
