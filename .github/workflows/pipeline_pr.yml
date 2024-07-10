@@ -42,7 +42,7 @@ jobs:
       - name: Run unit tests
         run: nutter run "${{ env.PROD_DIRECTORY }}/tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
         env:
-            CLUSTER: ${{ env.CLUSTER_ID }}
+            CLUSTER: ${{ secrets.CLUSTER_ID }}
             DATABRICKS_HOST: ${{secrets.DATABRICKS_HOST }}
             DATABRICKS_TOKEN: ${{secrets.DATABRICKS_TOKEN }}
 
