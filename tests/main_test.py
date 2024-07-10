@@ -10,7 +10,7 @@
 # COMMAND ----------
 
 from runtime.nutterfixture import NutterFixture, tag
-from src.cicd_w_dabs_ado_demo.main import get_taxis, get_spark
+from src.cicd_w_dabs_ga_demo.main import get_taxis, get_spark
 
 
 class TestTaxisData(NutterFixture):
