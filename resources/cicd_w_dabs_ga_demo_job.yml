@@ -41,7 +41,7 @@ resources:
       
       job_clusters:
         - job_cluster_key: job_cluster
-          cluster_id: ${{ secrets.CLUSTER_ID }}
+          existing_cluster_id: ${{ secrets.CLUSTER_ID }}
         # uncomment to run on job compute clusters
         # - job_cluster_key: job_cluster
         #   new_cluster:
