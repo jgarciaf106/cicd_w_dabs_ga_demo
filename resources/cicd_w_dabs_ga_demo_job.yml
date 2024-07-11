@@ -26,11 +26,13 @@ resources:
             pipeline_id: ${resources.pipelines.cicd_w_dabs_ga_demo_pipeline.id}
 
         - task_key: main_task
+          depends_on:
+              - task_key: refresh_pipeline
           python_wheel_task:
             package_name: cicd_w_dabs_ga_demo
             entry_point: main
           environment_key: Python_Wheel
-          
+
       queue:
         enabled: true
       environments:
@@ -40,6 +42,7 @@ resources:
             dependencies:
               - ../dist/*.whl
 
+    # UNCOMMENT THIS SECTION TO RUN IN NON-SERVERLESS MODE
         # - task_key: main_task
         #   depends_on:
         #     - task_key: refresh_pipeline
@@ -52,6 +55,7 @@ resources:
         #     # See https://docs.databricks.com/dev-tools/bundles/library-dependencies.html
         #     # for more information on how to add other libraries.
         #     - whl: ../dist/*.whl
+
 
       # job_clusters:
       #   - job_cluster_key: job_cluster
