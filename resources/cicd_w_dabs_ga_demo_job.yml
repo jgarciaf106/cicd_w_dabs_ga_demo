@@ -1,4 +1,7 @@
 # The main job for cicd_w_dabs_ga_demo.
+env:
+  CLUSTER_ID_PROD: 0711-153558-82ieq2vl
+
 resources:
   jobs:
     cicd_w_dabs_ga_demo_job:
@@ -15,7 +18,7 @@ resources:
 
       tasks:
         - task_key: notebook_task
-          existing_cluster_id: 0502-164606-b9i8sf6l
+          existing_cluster_id: $CLUSTER_ID_PROD
           notebook_task:
             notebook_path: ../src/notebook.ipynb
         
@@ -28,7 +31,7 @@ resources:
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
-          existing_cluster_id: 0502-164606-b9i8sf6l
+          existing_cluster_id: $CLUSTER_ID_PROD
           python_wheel_task:
             package_name: cicd_w_dabs_ga_demo
             entry_point: main
