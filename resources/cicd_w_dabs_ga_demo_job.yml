@@ -15,7 +15,7 @@ resources:
 
       tasks:
         - task_key: notebook_task
-          #job_cluster_key: job_cluster
+          job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../src/notebook.ipynb
         
@@ -28,7 +28,7 @@ resources:
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
-          #job_cluster_key: job_cluster
+          job_cluster_key: job_cluster
           python_wheel_task:
             package_name: cicd_w_dabs_ga_demo
             entry_point: main
@@ -38,12 +38,15 @@ resources:
             # for more information on how to add other libraries.
             - whl: ../dist/*.whl
 
-      # uncomment to run on non-serverless clusters
-      # job_clusters:
-      #   - job_cluster_key: job_cluster
-      #     new_cluster:
-      #       spark_version: 13.3.x-scala2.12
-      #       node_type_id: Standard_D3_v2
-      #       autoscale:
-      #           min_workers: 1
-      #           max_workers: 4
+      
+      job_clusters:
+        - job_cluster_key: job_cluster
+          cluster_id: ${{ secrets.CLUSTER_ID }}
+        # uncomment to run on job compute clusters
+        # - job_cluster_key: job_cluster
+        #   new_cluster:
+        #     spark_version: 13.3.x-scala2.12
+        #     node_type_id: Standard_D3_v2
+        #     autoscale:
+        #         min_workers: 1
+        #         max_workers: 4
