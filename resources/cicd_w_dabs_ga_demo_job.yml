@@ -15,7 +15,7 @@ resources:
 
       tasks:
         - task_key: notebook_task
-          existing_cluster_id: ${{ secrets.CLUSTER_ID }}
+          existing_cluster_id: 0502-164606-b9i8sf6l
           notebook_task:
             notebook_path: ../src/notebook.ipynb
         
@@ -28,7 +28,7 @@ resources:
         - task_key: main_task
           depends_on:
             - task_key: refresh_pipeline
-          existing_cluster_id: ${{ secrets.CLUSTER_ID }}
+          existing_cluster_id: 0502-164606-b9i8sf6l
           python_wheel_task:
             package_name: cicd_w_dabs_ga_demo
             entry_point: main
