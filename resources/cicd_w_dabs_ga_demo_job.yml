@@ -31,12 +31,12 @@ resources:
           python_wheel_task:
             package_name: cicd_w_dabs_ga_demo
             entry_point: main
-          environment_key: Python_Wheel
+          environment_key: GA_Python_Wheel
 
       queue:
         enabled: true
       environments:
-        - environment_key: Python_Wheel
+        - environment_key: GA_Python_Wheel
           spec:
             client: "1"
             dependencies:

@@ -5,7 +5,7 @@ resources:
       name: cicd_w_dabs_ga_demo_pipeline
       serverless: true
       catalog: cicd_demos
-      target: dlt_pipeline
+      target: ga_dlt_pipeline
       libraries:
         - notebook:
             path: ../src/dlt_pipeline.ipynb
