@@ -16,7 +16,7 @@ targets:
     mode: development
     default: true
     workspace:
-      host: ${{ secrets.DATABRICKS_HOST }}
+      host: ${workspace.host}
 
   ## Optionally, there could be a 'staging' target here.
   ## (See Databricks docs on CI/CD at https://docs.databricks.com/dev-tools/bundles/ci-cd.html.)
@@ -31,7 +31,7 @@ targets:
     # Doing so enables strict verification of the settings below.
     mode: production
     workspace:
-      host: ${{ secrets.DATABRICKS_HOST }}
+      host: ${workspace.host}
       # We always use /Users/service_principal for all resources to make sure we only have a single copy.
       # If this path results in an error, please make sure you have a recent version of the CLI installed.
       root_path: /Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
