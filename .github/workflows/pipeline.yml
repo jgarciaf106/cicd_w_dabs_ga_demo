@@ -35,8 +35,6 @@ jobs:
 
       - name: Updating databricks repo
         run: databricks repos update ${{ env.PROD_DIRECTORY }} --branch ${{ github.ref_name }}
-        env:
-          DATABRICKS_BUNDLE_ENV: prod
 
       - name: Run unit tests
         run: nutter run "${{ env.PROD_DIRECTORY }}/tests/" --cluster_id $CLUSTER --recursive --junit_report --timeout 900
@@ -63,8 +61,6 @@ jobs:
 
       - name: Deploy bundle
         run: databricks bundle deploy --target prod
-        env:
-          DATABRICKS_BUNDLE_ENV: prod
 
   run_pipeline:
     name: Run pipeline update
@@ -85,5 +81,3 @@ jobs:
 
       - name: Run pipeline update
         run: databricks bundle run cicd_w_dabs_ga_demo_job --target prod
-        env:
-          DATABRICKS_BUNDLE_ENV: prod
