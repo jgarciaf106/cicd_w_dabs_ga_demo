@@ -16,14 +16,14 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://adb-522548490841242.2.azuredatabricks.net
+      host: ${{ secrets.DATABRICKS_HOST }}
 
   ## Optionally, there could be a 'staging' target here.
   ## (See Databricks docs on CI/CD at https://docs.databricks.com/dev-tools/bundles/ci-cd.html.)
   #
   # staging:
   #   workspace:
-  #     host: https://adb-522548490841242.2.azuredatabricks.net
+  #     host: workspace_url
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -31,11 +31,11 @@ targets:
     # Doing so enables strict verification of the settings below.
     mode: production
     workspace:
-      host: https://adb-522548490841242.2.azuredatabricks.net
-      # We always use /Users/andres.garcia@databricks.com for all resources to make sure we only have a single copy.
+      host: ${{ secrets.DATABRICKS_HOST }}
+      # We always use /Users/service_principal for all resources to make sure we only have a single copy.
       # If this path results in an error, please make sure you have a recent version of the CLI installed.
       root_path: /Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
     run_as:
-      # This runs as andres.garcia@databricks.com in production. We could also use a service principal here,
+      # This runs as service principal in production. We could also use a service principal here,
       # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
       service_principal_name:  ${workspace.current_user.userName}
