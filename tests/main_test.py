@@ -19,7 +19,7 @@ class TestTaxisData(NutterFixture):
 
     def assertion_test_main(self):
         taxis = get_taxis(get_spark())
-        assert taxis.count() > 5, "Results returned less than 5 Records"
+        assert taxis.count() > 6, "Results returned less than 5 Records"
 
 
 # COMMAND ----------
