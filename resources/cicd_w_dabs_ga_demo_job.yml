@@ -1,4 +1,3 @@
-# The main job for cicd_w_dabs_ga_demo.
 resources:
   jobs:
     cicd_w_dabs_ga_demo_job:

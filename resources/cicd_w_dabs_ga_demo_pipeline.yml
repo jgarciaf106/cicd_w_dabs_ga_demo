@@ -1,11 +1,10 @@
-# The main pipeline for cicd_w_dabs_ga_demo
 resources:
   pipelines:
     cicd_w_dabs_ga_demo_pipeline:
       name: cicd_w_dabs_ga_demo_pipeline
       serverless: true
-      catalog: cicd_demos
-      target: ga_dlt_pipeline
+      catalog: platform
+      target: cicd
       libraries:
         - notebook:
             path: ../src/dlt_pipeline.ipynb
